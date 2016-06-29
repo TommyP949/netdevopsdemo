@@ -15,6 +15,11 @@ onie_installer_ppc: "/var/www/CumulusLinux-3.0.0-powerpc.bin"
 web_root: "/var/www/"
 
 # REPO URLS
+sj1_repo_url: "http://sj1-repo.bjn.io/"
+eu1_repo_url: "http://eu1-repo.bjn.io/"
+au1_repo_url: "http://au1-repo.bjn.io/"
+sg1_repo_url: "http://sg1-repo.bjn.io/"
+bitcouncil_apt_repo_url: "http://10.100.0.15/bc-apt/debs"
 
 #DEB REPOS
 apt_cache_timeout: 900
@@ -23,7 +28,7 @@ cmls_security_repo: "deb http://repo.cumulusnetworks.com CumulusLinux-3.0 securi
 cmls_testing_repo: "deb http://repo.cumulusnetworks.com CumulusLinux-3.0 testing"
 debian_main_repo: "deb http://ftp.us.debian.org/debian/ wheezy main contrib non-free"
 debian_src_repo: "deb-src http://ftp.us.debian.org/debian/ wheezy main contrib non-free"
-
+bitcouncil_apt_repo: "deb http://10.0.254.254/bc-apt/debs"
 
 # USER ACCOUNTS
 user_root: root
@@ -40,14 +45,14 @@ ntp_server_2: 10.0.254.254
 # DNS Name Servers
 dns_domain: bluejeansnet.com
 dns_search_domain: bluejeansnet.com
-dns_int_ns1: 4.4.4.4
-dns_int_ns2: 8.8.8.8
+dns_int_ns1: 8.8.8.8
+dns_int_ns2: 8.8.4.4
 dns_ext_ns1: 8.8.8.8
 dns_ext_ns2: 8.8.4.4
 
 # QUAGGA PASSWORDS
-zebra_passwd: CumulusLinux!
-quagga_passwd: CumulusLinux!
+zebra_passwd: password!
+quagga_passwd: password!
 
 rabbit_server: 'bc-z-rabbitmq-internal-elb.bjn.io'
 sensu_client_log_level: 'warn'
