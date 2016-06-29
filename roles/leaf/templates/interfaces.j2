@@ -22,16 +22,6 @@ iface {{ swpname }}
 
 {% endfor %}
 
-{% if 'l2spinelinks' in switch %}
-#### L2 Spine Links for br10 External Network ####
-{% for swpname in switch.l2spinelinks -%}
-auto {{ swpname }}
-iface {{ swpname }}
-    mtu 9016
-
-{% endfor %}
-{% endif -%}
-
 #### L3 Spine Links for Internal Networks####
 {% for swpname in switch.l3spinelinks -%}
 auto {{ swpname }}
