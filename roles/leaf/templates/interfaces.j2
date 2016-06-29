@@ -14,23 +14,23 @@ iface lo inet loopback
 source /etc/network/interfaces.d/swp_defaults
 
 
-#### ToR leaf-to-leaf Links for VRR ####
-{% for swpname in switch.torlinks -%}
-auto {{ swpname }}
-iface {{ swpname }}
-    mtu 9016
+##### bond interface #####
+auto bond0
+iface bond0
+  bond-slaves {{ switch.torlinks | join(" ") }}
+  bond-mode 802.3ad
+  bond-miimon 100
+  bond-use-carrier 1
+  bond-lacp-rate 1
+  bond-min-links 1
+  bond-xmit-hash-policy layer3+4
+
+#### bond sub-interfaces ####
+{% for bondsub in switch.bondsubint -%}
+auto {{ bondsub }}
+iface {{ bondsub }}
 
 {% endfor %}
-
-#### L3 Spine Links for Internal Networks####
-{% for swpname in switch.l3spinelinks -%}
-auto {{ swpname }}
-iface {{ swpname }}
-    mtu 9016
-    address {{ loopback.ip }}
-
-{% endfor %}
-
 
 #### Bridge Interfaces for Server Links ####
 {% for bridge in switch.bridges -%}
