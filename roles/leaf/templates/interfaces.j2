@@ -1,11 +1,7 @@
 {% set switch = interfaces[ansible_hostname] -%}
-{% set loopback_ip = interfaces[ansible_hostname].loopback.ip -%}
-
+{% set loopback = switch.loopback -%}
 
 ##### eth0 OOB Managment #####
 auto eth0
 iface eth0 inet dhcp
 
-auto lo
-iface lo inet loopback
-  address {{ loopback_ip }}
