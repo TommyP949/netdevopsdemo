@@ -49,22 +49,4 @@ iface {{ bondsub }}
 
 {% endfor %}
 
-#### Bridge Interfaces for Server Links ####
-{% for bridge in switch.bridges -%}
-#
-#
-#####   Bridge Name {{ bridge.name }} #####
-auto {{ bridge.name }}
-iface {{ bridge.name }}
-  bridge-ports {{ bridge.bridge_ports | join(' ')}}
-  bridge-stp on
-  mstpctl-treeprio 32768
-{% if 'address' in bridge %}
-  address {{ bridge.address }}
-{% endif -%}
-{% if 'address_virtual_mac' in bridge %}
-  address-virtual {{ bridge.address_virtual_mac }} {{ bridge.address_virtual_ip }}
 
-{% endif -%}
-
-{% endfor %}
