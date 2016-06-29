@@ -33,6 +33,7 @@ bitcouncil_apt_repo: "deb http://10.0.254.254/bc-apt/debs"
 # USER ACCOUNTS
 user_root: root
 user_admin: admin
+user_cumulus: cumulus
 
 # APACHE
 apache_fqdn: localhost
