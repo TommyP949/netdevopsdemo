@@ -1,4 +1,4 @@
-{% set switch = interfaces.[ansible_hostname] -%}
+{% set switch = interfaces[ansible_hostname] -%}
 {% set loopback = switch.loopback -%}
 
 
@@ -12,59 +12,3 @@ iface lo inet loopback
 
 ##### Source defaults for all interfaces except TOR, L2 and L3 Spine Links #####
 source /etc/network/interfaces.d/swp_defaults
-
-
-#### ToR leaf-to-leaf Links for VRR ####
-{% for swpname in switch.torlinks -%}
-auto {{ swpname }}
-iface {{ swpname }}
-    mtu 9016
-
-{% endfor %}
-
-#### L3 Spine Links for Internal Networks####
-{% for swpname in switch.l3spinelinks -%}
-auto {{ swpname }}
-iface {{ swpname }}
-    mtu 9016
-    address {{ loopback.ip }}
-
-{% endfor %}
-
-##### bond interface #####
-auto bond0
-iface bond0
-  bond-slaves {{ switch.torlinks | join(" ") }}
-  bond-mode 802.3ad
-  bond-miimon 100
-  bond-use-carrier 1
-  bond-lacp-rate 1
-  bond-min-links 1
-  bond-xmit-hash-policy layer3+4
-
-#### bond sub-interfaces ####
-{% for bondsub in switch.bondsubint -%}
-auto {{ bondsub }}
-iface {{ bondsub }}
-
-{% endfor %}
-
-#### Bridge Interfaces for Server Links ####
-{% for bridge in switch.bridges -%}
-#
-#
-#####   Bridge Name {{ bridge.name }} #####
-auto {{ bridge.name }}
-iface {{ bridge.name }}
-  bridge-ports {{ bridge.bridge_ports | join(' ')}}
-  bridge-stp on
-  mstpctl-treeprio 32768
-{% if 'address' in bridge %}
-  address {{ bridge.address }}
-{% endif -%}
-{% if 'address_virtual_mac' in bridge %}
-  address-virtual {{ bridge.address_virtual_mac }} {{ bridge.address_virtual_ip }}
-
-{% endif -%}
-
-{% endfor %}
