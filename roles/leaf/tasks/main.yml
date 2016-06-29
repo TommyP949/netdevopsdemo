@@ -26,7 +26,3 @@
 
 - name: Configure hosts file
   template: src=hosts.j2 dest=/etc/hosts
-
-- name: Configure dhcp relay
-  template: src=isc-dhcp-relay.j2 dest=/etc/default/isc-dhcp-relay
-  notify: restart dchprelay 

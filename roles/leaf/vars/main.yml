@@ -3,72 +3,15 @@ interfaces:
   lab-101-leaf01:
     loopback:
       ip: "10.100.254.13/32"
-    torlinks:
-      - swp5
-    l3spinelinks:
-      - swp1
-      - swp2
-    bondsubint:
-      - bond0.25
-    bridges:
-      -
-        name: "br25"
-        bridge_ports: ["bond0.25", "swp3", "swp4"]
-        address: "10.100.25.2/24"
-        address_virtual_mac: "00:00:5e:00:01:01"
-        address_virtual_ip: "10.100.25.1/24"
 
   lab-r101-leaf02:
     loopback:
       ip: "10.100.254.14/32"
-    torlinks:
-      - swp5
-    l3spinelinks:
-      - swp1
-      - swp2
-    bondsubint:
-      - bond0.25
-    bridges:
-      -
-        name: "br25"
-        bridge_ports: ["bond0.25", "swp3", "swp4"]
-        address: "10.100.25.3/24"
-        address_virtual_mac: "00:00:5e:00:01:01"
-        address_virtual_ip: "10.100.25.1/24"
-
+ 
   lab-102-leaf01:
     loopback:
       ip: "10.100.254.15/32"
-    torlinks:
-      - swp5
-    l3spinelinks:
-      - swp1
-      - swp2
-    bondsubint:
-      - bond0.26
-    bridges:
-      -
-        name: "br26"
-        bridge_ports: ["bond0.26", "swp3", "swp4"]
-        address: "10.100.26.2/24"
-        address_virtual_mac: "00:00:5e:00:01:01"
-        address_virtual_ip: "10.100.26.1/24"
 
   lab-r102-leaf02:
     loopback:
       ip: "10.100.254.16/32"
-    torlinks:
-      - swp5
-    l3spinelinks:
-      - swp1
-      - swp2
-    bondsubint:
-      - bond0.26
-    bridges:
-      -
-        name: "br26"
-        bridge_ports: ["bond0.26", "swp3", "swp4"]
-        address: "10.100.26.3/24"
-        address_virtual_mac: "00:00:5e:00:01:01"
-        address_virtual_ip: "10.100.26.1/24"
-

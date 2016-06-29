@@ -9,6 +9,3 @@ iface eth0 inet dhcp
 auto lo
 iface lo inet loopback
   address {{ loopback.ip }}
-
-##### Source defaults for all interfaces except TOR, L2 and L3 Spine Links #####
-source /etc/network/interfaces.d/swp_defaults

@@ -8,29 +8,4 @@ log file /var/log/quagga/ospfd.log
 {### Combine config files to /etc/quagga/Quagga.conf ###}
 service integrated-vtysh-config
 !
-{### Spine Interfaces ###}
-{% for switchport in spineports %}
-interface {{ switchport }}
- ip ospf network point-to-point
- link-detect
-!
-{% endfor %}
-{### Bridge Interfaces ###}
-{% for bridge in bridges -%}
-{% if 'address' in bridge %}
-interface {{ bridge.name }}
- ip ospf network point-to-point
-!
-{% endif %}
-{% endfor -%}
-{### OSPF Unnumbered Config ###}
-router ospf
- ospf router-id {{ router_id }}
- network {{ loopback_ip }} area 0.0.0.0
-{% for bridge in bridges -%}
-{% if 'address' in bridge %}
- network {{ bridge.address }} area 0.0.0.0
- passive-interface {{ bridge.name }}-v0
-{% endif %}
-{% endfor -%}
-!
+
