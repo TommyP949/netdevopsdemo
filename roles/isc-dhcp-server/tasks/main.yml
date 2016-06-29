@@ -1,0 +1,13 @@
+---
+ - name: install isc-dhcp-server
+   apt: name=isc-dhcp-server state=present update_cache=yes
+
+ - name: install dhcp defaults file to /etc/default/isc-dhcp-server
+   copy: src=isc-dhcp-server dest=/etc/default/isc-dhcp-server
+
+ - name: install dhcp config to /etc/dhcp/dhcpd.conf
+   copy: src=dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+
+ - name: start isc-dhcp-server and enable on boot
+   service: name=isc-dhcp-server state=started enabled=yes
+   notify: restart isc-dhcp-server

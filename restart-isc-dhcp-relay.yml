@@ -1,0 +1,8 @@
+---
+- hosts: leaf
+  gather_facts: no
+  become: yes
+  roles:
+    - restart-isc-dhcp-relay
+  handlers:
+    - include: handlers/main.yml

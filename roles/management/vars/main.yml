@@ -1,0 +1,5 @@
+---
+mgmt_switch_hostname: " sj1-r301-mgmt"
+mgmt_switch_eth0_ip: "10.100.253.242"
+mgmt_switch_eth0_netmask: "255.255.255.0"
+mgmt_switch_eth0_gateway: "10.100.253.6"

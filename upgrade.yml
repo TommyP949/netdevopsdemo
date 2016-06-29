@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  roles:
+    - upgrade
+  handlers:
+    - include: handlers/main.yml
+

@@ -1,0 +1,16 @@
+---
+  - name: install apache2
+    apt: name='apache2' state=present
+
+  - name: start apache2 and enable on boot
+    service: name=apache2 state=started enabled=yes
+
+  - name: copy Cumulus license.txt to webroot for ZTP
+    copy: src=license.txt dest=/var/www/license.txt
+
+  - name: copy ztp-deploy script to webroot
+    copy: src=ztp-deploy.sh dest=/var/www/ztp-deploy.sh
+
+  - name: copy localhost entry apache2 configuration and restart
+    template: src=fqdn.j2 dest=/etc/apache2/conf.d/fqdn
+    notify: restart apache2

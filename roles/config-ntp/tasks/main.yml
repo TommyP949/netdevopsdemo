@@ -1,0 +1,7 @@
+---
+ - name: Setup NTP
+   template: src=ntp.conf.j2 dest=/etc/ntp.conf
+
+ - name: Set Time Zone via symbolic link to /usr/share/zoneinfo/America/Los_Angeles
+   file: src=/usr/share/zoneinfo/America/Los_Angeles dest=/etc/localtime state=link
+   notify: restart ntp

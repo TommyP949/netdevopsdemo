@@ -1,0 +1,20 @@
+---
+- hosts: 127.0.0.1
+  gather_facts: no
+  connection: local
+  roles:
+    - rm-local-cl-support
+
+- hosts: leaf,spine
+  become: yes
+  roles:
+    - add-repos
+    - rm-cl-support
+    - get-cl-support
+    - rm-cl-support
+
+- hosts: 127.0.0.1
+  gather_facts: no
+  connection: local
+  roles:
+    - gzip-cl-support

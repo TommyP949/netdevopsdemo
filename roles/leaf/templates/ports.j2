@@ -1,0 +1,21 @@
+#Configured by Ansible
+#
+### 48 x 10G Breakout of 40G ports for servers in pipeline X ###
+{% for i in range(1,13) %}
+{{i}}=4x10G
+{% endfor %}
+
+### 4 X 40 Gig in pipeline X ###
+{% for i in range(13,17) %}
+{{i}}=40G
+{% endfor %}
+
+### 40 X 10G Breakout of 40G ports for servers in pipeline Y ###
+{% for i in range(17,27) %}
+{{i}}=4x10G
+{% endfor %}
+
+### 6 40G Ports with no 10G breakout for uplinks in pipeline Y ###
+{% for i in range(27,33) %}
+{{i}}=40G
+{% endfor %}

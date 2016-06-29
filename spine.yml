@@ -1,0 +1,15 @@
+---
+- hosts: spine
+  user: root
+  roles:
+    - install-license
+    - add-admin-user
+    - config-nameserver
+    - config-ntp
+    - config-quagga-defaults
+    - ptmd
+    - spine
+    - restart-networking-quagga
+  handlers:
+    - include: handlers/main.yml
+

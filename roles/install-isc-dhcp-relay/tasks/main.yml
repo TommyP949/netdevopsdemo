@@ -1,0 +1,9 @@
+---
+# tasks file for install-isc-dhcp-relay
+ - name: install isc-dhcp-relay
+   apt: name=isc-dhcp-relay state=present
+   ignore_errors: yes
+
+ - name: start isc-dhcp-relay and enable on boot
+   service: name=isc-dhcp-relay state=restarted enabled=yes
+   ignore_errors: yes

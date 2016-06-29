@@ -1,0 +1,20 @@
+---
+interfaces:
+  lab-r000-spine01:
+    loopback:
+      ip: "10.100.254.11/32"
+    links: ["swp1", "swp2", "swp3", "swp4"]
+    ospflinks:
+      - "swp1"
+      - "swp2"
+      - "swp3"
+      - "swp4"
+  sj1-r000-spine02:
+    loopback:
+      ip: "10.100.254.12/32"
+    links: ["swp1", "swp2", "swp3", "swp4"]
+    ospflinks:
+      - "swp1"
+      - "swp2"
+      - "swp3"
+      - "swp4"

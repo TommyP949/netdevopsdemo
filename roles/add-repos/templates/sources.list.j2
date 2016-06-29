@@ -1,0 +1,19 @@
+#  Configured with Ansible
+#
+#  Cumulus Package Repository.
+#
+#  Only packages from this repository are supported
+#
+
+{{ cmls_main_repo }}
+{{ cmls_security_repo }}
+
+# Comment the next line to remove access to the testing component
+{{ cmls_testing_repo }}
+
+# Uncomment the next line to get access to the Cumulus community repository
+# deb http://repo.cumulusnetworks.com/community/ CumulusLinux-Community-2.5  main addons updates
+
+#debian wheezy repos
+{{ debian_main_repo }}
+{{ debian_src_repo }}

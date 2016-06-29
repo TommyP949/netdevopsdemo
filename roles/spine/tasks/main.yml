@@ -1,0 +1,26 @@
+- name: Configure /etc/network/interfaces.d/swp_defaults
+  template: src=swp_defaults.j2 dest=/etc/network/interfaces.d/swp_defaults
+
+- name: Configure /etc/network/interfaces
+  template: src=interfaces.j2 dest=/etc/network/interfaces
+  notify: reload networking
+
+- name: Configure ports.conf configuration
+  template: src=ports.j2 dest=/etc/cumulus/ports.conf
+
+- name: Configure quagga daemons file
+  copy: src=daemons dest=/etc/quagga/daemons backup=yes
+  notify: restart quagga
+
+- name: Configure zebra daemon file
+  template: src=zebra_config.j2 dest=/etc/quagga/zebra.conf
+  notify: restart quagga
+
+- name: Enable Quagga reload
+  copy: src=quagga.default dest=/etc/default/quagga
+  notify: restart quagga
+
+- name: Configure quagga configuration
+  template: src=quagga_config.j2 dest=/etc/quagga/Quagga.conf
+  notify: restart quagga
+

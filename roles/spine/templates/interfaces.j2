@@ -1,0 +1,39 @@
+{% set switch = interfaces[ansible_hostname] -%}
+{% set loopback_ip = switch.loopback.ip -%}
+#Configured by Ansible 
+
+auto eth0
+iface eth0 inet dhcp
+
+auto lo
+iface lo inet loopback
+  address {{ loopback_ip }}
+
+source /etc/network/interfaces.d/swp_defaults
+
+#### L2 Bridge Links ####
+{% for swpname in switch.bridgelinks -%}
+auto {{ swpname }}
+iface {{ swpname }}
+    mtu 9016
+
+{% endfor %}
+
+#### Bridge ####
+{% for bridge in switch.bridges -%}
+auto {{ bridge.name }}
+iface {{ bridge.name }}
+  bridge-ports {{ bridge.bridge_ports | join(' ')}}
+  bridge-stp on
+  mstpctl-treeprio {{ bridge.treeprio }}
+
+{% endfor %}
+
+#### L3 OSPF Links ####
+{% for swpname in switch.links -%}
+auto {{ swpname }}
+iface {{ swpname }}
+    mtu 9016
+    address {{ loopback_ip }}
+
+{% endfor %}

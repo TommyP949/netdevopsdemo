@@ -1,0 +1,20 @@
+---
+# tasks file for mgmt-switch-networking
+  - name: copy resolv.conf file
+    template: src=resolv.conf.j2 dest=/etc/resolv.conf
+
+  - name: copy hosts file to /etc/hosts
+    template: src=hosts.j2 dest=/etc/hosts
+
+  - name: copy template interfaces.j2 template to /etc/network/interfaces
+    template: src=interfaces.j2 dest=/etc/network/interfaces
+    notify: reload networking
+
+  - name: copy template hostname.j2 template to /etc/hostname
+    template: src=hostname.j2 dest=/etc/hostname
+    notify: reload networking
+
+  - name: make sure the bridge interface is up with ifup br interface
+    command: ifup br
+    register: command_result
+    failed_when: "'FAILED' in command_result.stderr"

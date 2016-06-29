@@ -1,0 +1,13 @@
+---
+# tasks file for get-cl-support
+- name: make sure we have a valid resolv.conf
+  template: src=resolv.conf.j2 dest=/etc/resolv.conf
+
+- name: install rsync package if needed on the target switch
+  apt: name=rsync state=present update_cache=yes
+
+- name: Generate new cl-support file
+  command: /usr/cumulus/bin/cl-support
+
+- name: Use rsync to fetch cl-support files and save to local /var/support/rsynced/<hostname> directory
+  synchronize:  src=/var/support/ dest=/var/support/rsynced/{{ ansible_hostname }} mode=pull

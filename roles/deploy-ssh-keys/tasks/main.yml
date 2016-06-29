@@ -1,0 +1,12 @@
+---
+  - name: Make ssh dir for cumulus user
+    file: path=/home/cumulus/.ssh state=directory mode=0755
+
+  - name: Copy authorized key for Cumulus user
+    copy: src=/var/www/authorized_keys dest=/home/cumulus/.ssh/authorized_keys
+
+  - name: Make ssh dir for root user
+    file: path=/root/.ssh state=directory mode=0755
+
+  - name: Copy authorized key for root user
+    copy: src=/var/www/authorized_keys dest=/root/.ssh/authorized_keys

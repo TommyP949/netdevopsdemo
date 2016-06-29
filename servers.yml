@@ -1,0 +1,54 @@
+---
+- hosts: all
+  sudo: yes
+  user: vagrant
+  tasks:
+    - name:
+      command: "uname -a"
+- hosts: server1
+  user: vagrant
+  sudo: yes
+  roles:
+    - role: bennojoy.network_interface
+      network_bond_interfaces:
+        - device: bond0
+          address: 10.100.25.11
+          netmask: 255.255.255.0
+          bootproto: static
+          bond_mode: active-backup
+          bond_miimon: 100
+          bond_slaves: [eth1, eth2]
+          route:
+           - network: 10.100.0.0
+             netmask: 255.255.0.0
+             gateway: 10.100.25.1
+        - device: bond1
+          address: 1.1.1.1
+          netmask: 255.255.255.0
+          bootproto: static
+          bond_mode: active-backup
+          bond_miimon: 100
+          bond_slaves: [eth3, eth4]
+  handlers:
+    - include : handlers/main.yml
+- hosts: server2
+  user: vagrant
+  sudo: yes
+  roles:
+    - role: bennojoy.network_interface
+      network_bond_interfaces:
+        - device: bond0
+          address: 10.100.26.11
+          netmask: 255.255.255.0
+          bootproto: static
+          bond_mode: active-backup
+          bond_miimon: 100
+          bond_slaves: [eth1, eth2]
+          route:
+           - network: 10.100.0.0
+             netmask: 255.255.0.0
+             gateway: 10.100.26.1
+  handlers:
+    - include : handlers/main.yml
+
+

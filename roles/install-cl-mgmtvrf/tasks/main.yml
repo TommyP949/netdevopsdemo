@@ -1,0 +1,9 @@
+---
+- name: Install cl-mgmtvrf
+  apt: name=cl-mgmtvrf state=present
+
+- name: enable cl-mgmtvrf
+  command: cl-mgmtvrf --enable
+  register: command_result
+  failed_when: "'FAILED' in command_result.stdout"
+

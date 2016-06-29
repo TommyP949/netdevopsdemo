@@ -1,0 +1,4 @@
+---
+# tasks file for gzip-cl-support
+- name: Compress rsynced cl-support files
+  shell: /bin/tar zcvf /var/support/rsynced-cl-supports_`date '+%Y_%m_%d_%H_%M'`.tar.gz /var/support/rsynced/

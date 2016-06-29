@@ -1,0 +1,10 @@
+---
+# tasks file for restart-networking-quagga
+- name: restart networking
+  service: name=networking state=restarted
+
+- name: restart quagga
+  service: name=quagga state=restarted
+
+- name: restart dhcprelay
+  service: name=isc-dhcp-relay state=restarted

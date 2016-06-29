@@ -1,0 +1,31 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+{% if virtualbox is defined and virtualbox == "yes" %}
+auto vagrant
+iface vagrant inet dhcp
+{% endif %}
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet static
+	address {{ mgmt_eth0_ip }}
+	netmask {{ mgmt_eth0_netmask }}
+	gateway {{ mgmt_eth0_gateway }}
+
+auto br
+iface br
+  bridge_ports glob swp1-48
+  address 10.254.254.254/24
+
+{% for i in range(1, 49) %}
+auto swp{{ i }}
+iface swp{{ i }}
+
+{% endfor %}
+
+

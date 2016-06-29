@@ -1,0 +1,6 @@
+---
+# vars file for mgmt-switch-networking
+mgmt_switch_hostname: "bench"
+mgmt_switch_eth0_ip: "10.0.254.254"
+mgmt_switch_eth0_netmask: "255.255.255.0"
+mgmt_switch_eth0_gateway: "10.0.254.1"

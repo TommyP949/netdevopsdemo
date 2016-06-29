@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    onie_installer_intel: "/var/www/CumulusLinux-2.5.6-amd64.bin"
+  tasks:
+    - name: run cl-img-select -if to reinstall OS from scratch
+      command: cl-img-select -if
+      register: clselect
+
+    - debug: var=clselect
+
+    - pause:
+
+    - name: update symbolic link for main image
+      local_action: file
+          dest=/var/www/onie-installer
+          src={{ onie_installer_intel }}
+          owner=root
+          group=root
+          state=link
+      run_once: true
+
+    - name: reboot switches
+      command: shutdown -r now "Reboot triggered by Ansible"
+
+    - name: Fix known_host keys
+      local_action: known_hosts
+          path='/home/cumulus/.ssh/known_hosts'
+          name="{{ansible_hostname}}"
+          state=absent
+

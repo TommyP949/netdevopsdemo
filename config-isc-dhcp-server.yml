@@ -1,0 +1,16 @@
+---
+  # become root - sudo -i
+  # update sources - apt-get update
+  # install pip - apt-get install -y python-pip git python-dev gcc python-apt
+  # install ansible - pip install ansible; pip install ansible --upgrade
+  # clone the git repo locally - git clone https://github.com/CumulusNetworks/bluejeans
+  # cd into sj1 directory - cd bluejeans/sj1/sv5b/
+- hosts: 127.0.0.1
+  gather_facts: no
+  connection: local
+  become: yes
+  roles:
+    - config-isc-dhcp-server
+  handlers:
+    - include: handlers/main.yml
+

@@ -1,0 +1,68 @@
+---
+- hosts: lab-r000-spine01
+  user: root
+  roles:
+    - config-ntp
+    - config-nameserver
+    - config-quagga-defaults
+    - spine
+    - restart-networking-quagga
+  handlers:
+    - include: handlers/main.yml
+
+- hosts: lab-r000-spine02
+  user: root
+  roles:
+    - config-ntp
+    - config-nameserver
+    - config-quagga-defaults
+    - spine
+    - restart-networking-quagga
+  handlers:
+    - include: handlers/main.yml
+
+- hosts: lab-r101-leaf01
+  user: root
+  roles:
+    - config-ntp
+    - config-nameserver
+    - config-quagga-defaults
+    - leaf
+    - restart-networking-quagga
+  handlers:
+    - include: handlers/main.yml
+
+- hosts: lab-r101-leaf02
+  user: root
+  roles:
+    - config-ntp
+    - config-nameserver
+    - config-quagga-defaults
+    - leaf
+    - restart-networking-quagga
+  handlers:
+    - include: handlers/main.yml
+
+- hosts: lab-r102-leaf01
+  user: root
+  roles:
+    - config-ntp
+    - config-nameserver
+    - config-quagga-defaults
+    - leaf
+    - restart-networking-quagga
+  handlers:
+    - include: handlers/main.yml
+
+- hosts: lab-r102-leaf02
+  user: root
+  roles:
+    - config-ntp
+    - config-nameserver
+    - config-quagga-defaults
+    - leaf
+    - restart-networking-quagga
+  handlers:
+    - include: handlers/main.yml
+
+

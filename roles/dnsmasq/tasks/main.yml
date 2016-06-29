@@ -1,0 +1,6 @@
+---
+  - name: install dnsmasq
+    apt: name=dnsmasq state=present
+
+  - name: start dnsmasq and enable dnsmasq on boot
+    service: name=dnsmasq state=started enabled=yes

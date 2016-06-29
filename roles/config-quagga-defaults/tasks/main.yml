@@ -1,0 +1,13 @@
+---
+# tasks file for config-quagga-defaults
+- name: Configure quagga daemons file
+  copy: src=daemons dest=/etc/quagga/daemons backup=yes
+  notify: restart quagga
+
+- name: Configure zebra daemon file
+  template: src=zebra_config.j2 dest=/etc/quagga/zebra.conf
+  notify: restart quagga
+
+- name: Enable Quagga reload
+  copy: src=quagga.default dest=/etc/default/quagga
+  notify: restart quagga

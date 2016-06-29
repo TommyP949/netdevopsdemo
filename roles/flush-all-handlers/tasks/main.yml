@@ -1,0 +1,4 @@
+---
+# tasks file for flush-all-handlers
+  - name: run all handlers
+    meta: flush_handlers

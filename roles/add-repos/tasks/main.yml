@@ -1,0 +1,13 @@
+---
+- name: add repos to sources.list template
+  apt_repository: repo="{{ item }}" state=present
+  with_items:
+     - "{{ cmls_main_repo }}"
+     - "{{ cmls_security_repo }}"
+     - "{{ cmls_testing_repo }}"
+     - "{{ debian_main_repo }}"
+     - "{{ debian_src_repo }}"
+  ignore_errors: yes
+
+#- name: update cache and set cache timeout
+#  apt: update_cache=yes cache_valid_time={{ apt_cache_timeout }}

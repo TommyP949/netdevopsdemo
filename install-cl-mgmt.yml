@@ -1,0 +1,9 @@
+---
+- hosts: all
+  user: root
+  become: true
+  roles:
+    - add-repos
+    - install-cl-mgmtvrf
+  handlers:
+    - include: handlers/main.yml

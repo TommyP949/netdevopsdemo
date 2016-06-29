@@ -1,0 +1,7 @@
+packer_cache
+.vagrant
+*.ova
+*.box
+.DS_Store
+.vagrant/
+

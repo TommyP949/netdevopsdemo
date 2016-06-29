@@ -1,0 +1,4 @@
+---
+# tasks file for config-nameserver
+  - name: copy resolv.conf.j2 to /etc/resolv.conf
+    template: src=resolv.conf.j2 dest=/etc/resolv.conf

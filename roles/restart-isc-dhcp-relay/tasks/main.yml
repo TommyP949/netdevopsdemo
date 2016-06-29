@@ -1,0 +1,4 @@
+---
+# tasks file for restart-isc-dhcp-relay
+ - name: start isc-dhcp-server and enable on boot
+   service: name=isc-dhcp-relay state=restarted enabled=yes

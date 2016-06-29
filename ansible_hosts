@@ -1,0 +1,12 @@
+[spine]
+lab-r000-spine01
+lab-r000-spine02
+
+[leaf]
+lab-r101-leaf01
+lab-r101-leaf02
+lab-r102-leaf01
+lab-r102-leaf02
+
+[mgmt]
+bench

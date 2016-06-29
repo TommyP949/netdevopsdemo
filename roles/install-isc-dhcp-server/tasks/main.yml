@@ -1,0 +1,4 @@
+---
+ - name: install isc-dhcp-server
+   apt: name=isc-dhcp-server state=present enabled=yes
+

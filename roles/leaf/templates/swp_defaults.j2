@@ -1,0 +1,24 @@
+#Configured by Ansible
+#### Link Definitions ####
+{% for i in range(1,13) %}
+{% for j in range(0,4) %}
+auto swp{{i}}s{{j}}
+iface swp{{i}}s{{j}}
+     mtu 9016
+
+{% endfor %}
+{% endfor %}
+{% for i in range(13,17) %}
+auto swp{{i}}
+iface swp{{i}}
+     mtu 9016
+
+{% endfor %}
+{% for i in range(17,27) %}
+{% for j in range(0,4) %}
+auto swp{{i}}s{{j}}
+iface swp{{i}}s{{j}}
+     mtu 9016
+
+{% endfor %}
+{% endfor %}

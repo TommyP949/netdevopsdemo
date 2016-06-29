@@ -1,0 +1,64 @@
+#hosts file for oob management switch
+127.0.0.1 localhost
+
+# service infrascructure
+10.100.105.254 www.sj1.bjn.io
+10.104.0.254 www.au1.bjn.io
+10.106.0.254 www.sg1.bjn.io
+10.110.0.254 www.dc1.bjn.io
+10.102.0.254 www.eu1.bjn.io
+
+#cumulus management switch
+10.254.254.254 sj1-r002-mgmt
+
+#sv1 
+# superspines
+10.254.254.11 sj1-r002-spine01
+10.254.254.12 sj1-r002-spine02
+
+#sv5a
+# spine
+10.254.254.11 sj1-r101-spine01
+10.254.254.12 sj1-r102-spine02
+
+# sj leaf switches
+10.254.254.13 sj1-r101-leaf01
+10.254.254.14 sj1-r101-leaf02
+10.254.254.21 sj1-r102-leaf01
+10.254.254.22 sj1-r102-leaf02
+10.254.254.31 sj1-r103-leaf01
+10.254.254.32 sj1-r103-leaf02
+10.254.254.41 sj1-r104-leaf01
+10.254.254.42 sj1-r104-leaf02
+10.254.254.51 sj1-r201-leaf01
+10.254.254.52 sj1-r201-leaf02
+10.254.254.61 sj1-r202-leaf01
+10.254.254.62 sj1-r202-leaf02
+10.254.254.71 sj1-r203-leaf01
+10.254.254.72 sj1-r203-leaf02
+10.254.254.81 sj1-r204-leaf01
+10.254.254.82 sj1-r204-leaf02
+
+#sv5b
+# spine
+10.254.254.33 sj1-r301-spine01
+10.254.254.38 sj1-r303-spine02
+
+# sv5b leaf switches
+10.254.254.31 sj1-r301-leaf01
+10.254.254.32 sj1-r301-leaf02
+10.254.254.34 sj1-r302-leaf01
+10.254.254.35 sj1-r302-leaf02
+10.254.254.36 sj1-r303-leaf01
+10.254.254.37 sj1-r303-leaf02
+10.254.254.39 sj1-r304-leaf01
+10.254.254.40 sj1-r304-leaf02
+
+#Vagrant
+# Vagrant Servers
+10.254.254.101 server1
+10.254.254.102 server2
+
+
+
+

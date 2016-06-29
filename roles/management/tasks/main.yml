@@ -1,0 +1,78 @@
+---
+  # become root - sudo -i
+  # update sources - apt-get update
+  # install pip - apt-get install -y python-pip git python-dev gcc
+  # install ansible - pip install ansible; pip install ansible --upgrade
+  # clone the git repo locally - git clone https://github.com/CumulusNetworks/bluejeans
+  # cd into sj1 directory - cd bluejeans/sj1/sv5b/
+  - name: add repos
+    apt_repository: repo='{{ item }}' state=present
+    with_items:
+      - deb http://ftp.us.debian.org/debian/ wheezy main contrib non-free
+      - deb-src http://ftp.us.debian.org/debian/ wheezy main contrib non-free
+
+  - name: install required packages
+    apt: name='{{ item }}' state=present update_cache=yes
+    with_items:
+      - isc-dhcp-server
+      - dnsmasq
+      - apache2
+      - sshpass
+      - shedskin
+      - libyaml-dev
+      - python-netaddr
+
+  - name: copy resolv.conf file
+    copy: src=etc/resolv.conf dest=/etc/resolv.conf
+
+  - name: copy networking configuration file
+    template: src=interfaces.j2 dest=/etc/network/interfaces
+    notify: restart networking
+
+  - name: run all handlers
+    meta: flush_handlers
+
+  - name: install dns hosts file
+    copy: src=etc/hosts dest=/etc/hosts
+    notify: restart dnsmasq
+
+  - name: enable dnsmasq on boot
+    service: name=dnsmasq enabled=yes
+
+  - name: install dhcp config
+    copy: src=etc/dhcp/dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+
+  - name: install dhcp defaults file and restart
+    copy: src=etc/default/isc-dhcp-server dest=/etc/default/isc-dhcp-server
+    notify: restart isc-dhcp-server
+
+  - name: start isc-dhcp-server and enable on boot
+    service: name=isc-dhcp-server state=started enabled=yes
+
+  - name: start apache2 and enable on boot
+    service: name=apache2 state=started enabled=yes
+
+  - name: copy Cumulus license.txt to webroot for ZTP
+    copy: src=license.txt dest=/var/www/license.txt
+
+  - name: copy Cumulus license.txt to cumulus directory
+    copy: src=license.txt dest=/etc/cumulus/.license
+
+  - name: copy ztp-deploy script to webroot
+    copy: src=var/www/ztp-deploy.sh dest=/var/www/ztp-deploy.sh
+
+  - name: copy localhost entry apache2 configuration and restart
+    copy: src=etc/apache2/conf.d/fqdn dest=/etc/apache2/conf.d/fqdn
+    notify: restart apache2
+
+  - name: run all handlers
+    meta: flush_handlers
+
+  - name: create ssh key for root
+    user: name=root generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+
+  - name: create ssh key for cumulus
+    user: name=cumulus generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+
+  - name: copy public key to authorized keys
+    copy: src=/root/.ssh/id_rsa.pub dest=/var/www/authorized_keys

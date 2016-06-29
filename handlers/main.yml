@@ -1,0 +1,78 @@
+---
+- name: restart switchd
+  service: name=switchd state=restarted
+
+- name: wait for switchd to start
+  wait_for:  path=/var/run/switchd.ready delay=15
+
+- name: restart lldpd
+  service: name=lldpd state=restarted
+
+- name: restart ptmd
+  service: name=ptmd state=restarted
+
+- name: restart quagga
+  service: name=quagga state=restarted
+
+- name: restart ntp
+  service: name=ntp state=restarted
+
+- name: reload networking
+  shell: "service networking reload"
+  register: networking_reload
+  notify: print networking reload error
+  changed_when: "networking_reload.stderr != ''"
+
+- name: reload quagga
+  shell: "service quagga reload"
+  register: quagga_reload
+  notify: print quagga reload error
+  changed_when: "quagga_reload.stderr != ''"
+
+- name: print networking reload error
+  debug: msg="{{networking_reload.stderr}}"
+  when: networking_reload.stderr is defined
+  failed_when: "networking_reload.stderr is defined"
+
+- name: print quagga reload error
+  debug: msg="{{quagga_reload.stderr}}"
+  when: quagga_reload.stderr is defined
+  failed_when: "quagga_reload.stderr is defined"
+
+- name: install ACL
+  shell: "/usr/cumulus/bin/cl-acltool -i"
+  register: clacltool
+  notify: print acl_tool result
+
+- name: install mgmt vrf
+  apt: name= "cl-mgmtvrf" state=present
+
+- name: print acl_tool result
+  debug: var=clacltool.stdout_lines
+
+- name: restart jdoo
+  shell: "jdoo reload"
+
+- name: restart snmpd
+  shell: "jdoo start snmpd"
+
+- name: restart sensu_client
+  service: name=sensu-client state=restarted
+
+- name: restart networking
+  service: name=networking state=restarted
+
+- name: restart dnsmasq
+  service: name=dnsmasq state=restarted
+
+- name: restart isc-dhcp-server
+  service: name=isc-dhcp-server state=restarted
+
+- name: restart apache2
+  service: name=apache2 state=restarted
+
+- name: restart dhcprelay
+  shell: "/etc/init.d/isc-dhcp-relay restart"
+  register: dhcprelay
+  notify: print dhcprelay result
+
