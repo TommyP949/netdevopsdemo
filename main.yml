@@ -2,7 +2,6 @@
 - hosts: lab-r000-spine01
   user: root
   roles:
-    - config-ntp
     - config-nameserver
     - config-quagga-defaults
     - spine
@@ -13,7 +12,6 @@
 - hosts: lab-r000-spine02
   user: root
   roles:
-    - config-ntp
     - config-nameserver
     - config-quagga-defaults
     - spine
@@ -24,7 +22,6 @@
 - hosts: lab-r101-leaf01
   user: root
   roles:
-    - config-ntp
     - config-nameserver
     - config-quagga-defaults
     - leaf
@@ -35,7 +32,6 @@
 - hosts: lab-r101-leaf02
   user: root
   roles:
-    - config-ntp
     - config-nameserver
     - config-quagga-defaults
     - leaf
@@ -46,7 +42,6 @@
 - hosts: lab-r102-leaf01
   user: root
   roles:
-    - config-ntp
     - config-nameserver
     - config-quagga-defaults
     - leaf
@@ -57,7 +52,6 @@
 - hosts: lab-r102-leaf02
   user: root
   roles:
-    - config-ntp
     - config-nameserver
     - config-quagga-defaults
     - leaf
