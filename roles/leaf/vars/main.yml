@@ -17,6 +17,7 @@ interfaces:
         address: "10.100.25.2/24"
         address_virtual_mac: "00:00:5e:00:01:01"
         address_virtual_ip: "10.100.25.1/24"
+
   lab-r101-leaf02:
     loopback:
       ip: "10.100.254.14/32"
@@ -34,9 +35,7 @@ interfaces:
         address: "10.100.25.3/24"
         address_virtual_mac: "00:00:5e:00:01:01"
         address_virtual_ip: "10.100.25.1/24"
-    dhcp:
-      -
-        ports: ["br25", "swp27", "swp28", "swp31", "swp32"]
+
   lab-102-leaf01:
     loopback:
       ip: "10.100.254.15/32"
